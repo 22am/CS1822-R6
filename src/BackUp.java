@@ -21,8 +21,7 @@ public class BackUp implements Behavior{
 		sp.fetchSample(sample,0);
 		return sample[0] < 2.00f;
 	}
-
-
+	
 	public void action() {
 		Random rand = new Random();
 		this.pilot.backward();
@@ -35,8 +34,7 @@ public class BackUp implements Behavior{
 			this.pilot.rotate(510);
 		}
 	}
-
-
+	
 	public void suppress() {}
 
 }
