@@ -8,7 +8,7 @@ import lejos.robotics.navigation.MovePilot;
 public class Light implements Behavior {
 	private float maxSpeed = 720;
 	private MovePilot pilot;
-	private double LINEAR_SPEED;
+	//private double LINEAR_SPEED;
 	private EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
 	private SampleProvider sp = cs.getRedMode();
 	float[] colour = new float[1];
@@ -21,7 +21,7 @@ public class Light implements Behavior {
 	
 	Light(MovePilot p, double Speed, EV3ColorSensor cs)	{
 		this.pilot = p;
-		this.LINEAR_SPEED = Speed;
+		//this.LINEAR_SPEED = Speed;
 		this.cs2 = cs;
 		
 
@@ -44,7 +44,7 @@ public class Light implements Behavior {
 	}
 	
 	public void action() {
-		setLinearSpeed(maxSpeed);
+		//setLinearSpeed(maxSpeed);
 		
 		}
 	public void suppress()	{}
