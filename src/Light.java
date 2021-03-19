@@ -16,15 +16,10 @@ public class Light implements Behavior {
 	private EV3ColorSensor cs2;
 	private SampleProvider sp2 = cs2.getRedMode();
 
-	
-	
-	
-	Light(MovePilot p, double Speed, EV3ColorSensor cs)	{
+	Light(MovePilot p, double speed, EV3ColorSensor cs)	{
 		this.pilot = p;
-		this.LINEAR_SPEED = Speed;
+		this.LINEAR_SPEED = speed;
 		this.cs2 = cs;
-		
-
 	}
 	
 	public void setLinearSpeed(float LINEAR_SPEED)	{
@@ -34,21 +29,18 @@ public class Light implements Behavior {
 	public boolean takeControl() {
 		//Calibrate calibrate = new Calibrate();
 		this.sp.fetchSample(colour , 0);
-		
-		
 		this.sp2.fetchSample(colour2, 0);
-
 		
-
 		return(colour[0] > colour2[0]);
 	}
 	
 	public void action() {
 		setLinearSpeed(maxSpeed);
 		
-		}
-	public void suppress()	{}
 	}
+	
+	public void suppress()	{}
+}
 	
 	
 
