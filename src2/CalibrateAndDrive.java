@@ -110,13 +110,14 @@ public class LightWatcher extends Thread {
 		}
 	}
 }
-public class void playTune(File file) {
-	int time = Sound.playSample(new File(file), 20);
-	try {
-		Thread.sleep(time);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+public class SampleSound extends Thread {
+	private static void playTune(File file) {
+		int time = Sound.playSample(new File(file), 20);
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
-
 

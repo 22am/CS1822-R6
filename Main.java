@@ -48,7 +48,7 @@ public class Main {
 
 		//Wheel[] wheels = new Wheel[] {wRight, wLeft};
 		
-		/*PoseProvider poseP = new OdometryPoseProvider(pilot);
+		PoseProvider poseP = new OdometryPoseProvider(pilot);
 		Navigator nav = new Navigator(pilot, poseP);
 		Path route = new Path();
 		route.add(new Waypoint(100,0)); route.add(new Waypoint(100,100));
@@ -67,10 +67,10 @@ public class Main {
 			}
 			nav.followPath();
 			nav.waitForStop();
-		}*/
+		}
 	}
 }
-/*class Watcher extends Thread {
+class Watcher extends Thread {
 	private Navigator nav;
 	private float[] dist;
 	
@@ -91,4 +91,4 @@ public class Main {
 		}
 	}
 
-}*/
+}
