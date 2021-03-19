@@ -12,7 +12,7 @@ import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
-public class Driver {
+public class CalibrateAndDrive {
 	private static MovePilot getPilot(lejos.hardware.port.Port a, lejos.hardware.port.Port b, int diam, int offset) {
 		BaseRegulatedMotor mL = new EV3LargeRegulatedMotor(a);
 		Wheel wL = WheeledChassis.modelWheel(mL, diam).offset(-1 * offset);
@@ -26,21 +26,26 @@ public class Driver {
 
 	public static void main(String[] args) {
 		MovePilot pilot = getPilot(MotorPort.A, MotorPort.B, 60, 29);
+		pilot.setLinearSpeed(200);
+		
 		
 		EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
+		Calibrate cal = AbstractCalibrationFiler(new SampleProvider = cs.getRedMode());
+		cal.startCalibration();
+		cal.stopCalibration();
+		//max/min for colour values is cal.max/min
 		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S2);
+		//repeat lines 31 to 33 for any sensor that need to be calibrated
 		
-		calibrate calibratee = new calibrate(ts, cs);
 		
-		pilot.setLinearSpeed(200);
 		Trundle trundle = new Trundle(pilot);
 		BackUp backUp = new BackUp(pilot, null);
 		BatteryLevel batteryLevel = new BatteryLevel();
-		BluetoothConnection bluetoothConnection = new BluetoothConnection();
 		EmergencyStop emergencyStop = new EmergencyStop();
 		Light light = new Light(pilot, pilot.getLinearSpeed(), cs);
-		
-		Arbitrator ab = new Arbitrator(new Behavior[] {trundle, backUp, batteryLevel});
+		//BluetoothConnection bluetoothConnection = new BluetoothConnection(); not needed...
+
+		Arbitrator ab = new Arbitrator(new Behavior[] {trundle, backUp, batteryLevel, emergencyStop, light});
 		ab.go(); // This never returns! It is a blocking call.
 	}
 }
