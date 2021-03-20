@@ -98,7 +98,7 @@ public class LightWatcher extends Thread {
 	private MovePilot mp;
 	public DistanceWatcher(MovePilot _m) { mp = _m }
 	public void run() {
-		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S2);
+		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S3);
 		SampleProvider sp = ts.getTouchMode();
 		float[] samples = new float[1];
 		while (true) {
