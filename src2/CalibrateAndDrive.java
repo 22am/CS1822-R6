@@ -60,6 +60,19 @@ public class CalibrateAndDrive {
 		//Light light = new Light(pilot, pilot.getLinearSpeed(), cs);
 		
 		Arbitrator ab = new Arbitrator(new Behavior[] {trundle, emergencyStop});
+		
+		Thread watcher1= new DistanceWatcher(pilot);
+		watcher1.setDaemon(true);
+		watcher1.start();
+		
+		Thread watcher2= new TouchWatcher(pilot);
+		watcher2.setDaemon(true);
+		watcher2.start();
+		
+		Thread watcher3= new LightWatcher(pilot);
+		watcher3.setDaemon(true);
+		watcher3.start();
+		
 		ab.go(); // This never returns! It is a blocking call.
 	}
 }
