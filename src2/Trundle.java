@@ -10,7 +10,7 @@ public class Trundle implements Behavior {
 		return true;
 	}
 	public void action() {
-		pilot.travel(200);
+		pilot.forward();
 	}
 	public void suppress() {}
 
