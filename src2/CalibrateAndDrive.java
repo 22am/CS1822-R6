@@ -15,7 +15,6 @@ import lejos.robotics.filter.AbstractCalibrationFilter;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
-
 import java.io.File;
 import java.util.Random;
 
@@ -127,4 +126,3 @@ public class playTunee extends Thread {
 		}
 	}
 }
-
