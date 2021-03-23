@@ -37,19 +37,20 @@ public class CalibrateAndDrive {
 		MovePilot pilot = getPilot(MotorPort.A, MotorPort.B, WHEEL_DIAMETER, AXLE_LENGTH);
 		
 		EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S1);
-		SampleProvider cs_sp = cs.getRedMode();
+		//SampleProvider cs_sp = cs.getRedMode();
 		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S2);
-		SampleProvider ts_sp = ts.getTouchMode();
-		
-		Calibrate cal_cs = new AbstractCalibrationFilter(cs_sp) {};
-		Calibrate cal_ts = new AbstractCalibrationFilter(ts_sp) {};
-		
-		cal_cs.startCalibration();
+		//SampleProvider ts_sp = ts.getTouchMode();
+		//Calibrate cal_cs = new AbstractCalibrationFilter(cs_sp) {};
+		//Calibrate cal_ts = new AbstractCalibrationFilter(ts_sp) {};
+		//cal_cs.startCalibration();
 		//sleep
-		Thread.sleep(2000);
-		cal_cs.stopCalibration();
+		//Thread.sleep(2000);
+		//cal_cs.stopCalibration();
 		//min and max = cal_cs.max/min
 		//repeat for ts
+		
+		StartUp calibrate = new StartUp(ts,cs);
+		calibrate.start();
 		
 		pilot.setLinearSpeed(200);
 		
