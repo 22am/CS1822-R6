@@ -6,27 +6,27 @@ import lejos.utility.Delay;
 import java.util.Random;
 
 public class BackUp implements Behavior{
-	private EV3UltrasonicSensor sensor;
+	private EV3TouchSensor sensor;
 	private MovePilot pilot;
 	private SampleProvider sp;
 	private float[] sample = new float[1];
 	
-	BackUp(MovePilot pilot,EV3UltrasonicSensor sensor){
+	BackUp(MovePilot pilot,EV3TouchSensor sensor){
 		this.sensor = sensor;
-		this.sp = sensor.getDistanceMode();
+		this.sp = sensor.getTouchMode();
 		this.pilot = pilot;
 	}
 	
 	public boolean takeControl() {
 		sp.fetchSample(sample,0);
-		return sample[0] < 2.00f;
+		return sample[0] < 0.5f;
 	}
 
 
 	public void action() {
 		Random rand = new Random();
 		this.pilot.backward();
-		Delay.msDelay(400);
+		Delay.msDelay(1500); // 1.5s
 		
 		if (rand.nextBoolean()) {
 			this.pilot.rotate(-510);
