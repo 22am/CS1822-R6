@@ -46,7 +46,7 @@ public class Light implements Behavior {
 
   	public void action(){
 		this.pilot.setLinearSpeed(0);
-    		play tune();
+    		Sound.buzz();
 	}
 	
   	public void suppress(){}
