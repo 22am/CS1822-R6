@@ -10,12 +10,21 @@ public class BackUp implements Behavior{
 	private MovePilot pilot;
 	private SampleProvider sp;
 	private float[] sample = new float[1];
-	
-	BackUp(MovePilot pilot,EV3TouchSensor sensor){
+	private File file;
+	BackUp(MovePilot pilot,EV3TouchSensor sensor,File file){
 		this.sensor = sensor;
 		this.sp = sensor.getTouchMode();
 		this.pilot = pilot;
 	}
+	
+	public void playTune() {
+    		int time = Sound.playSample(this.file, 20);
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e){
+			e.printStackTrace();
+    		}
+  	}
 	
 	public boolean takeControl() {
 		sp.fetchSample(sample,0);
