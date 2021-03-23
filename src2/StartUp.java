@@ -7,16 +7,23 @@ public class StartUp{
   }
   
   public void start(){
-    Calibrate cal_cs = new AbstractCalibrationFilter(this.cs) {};
-    cal_cs.startCalibration();
-		Thread.sleep(2000);
-		cal_cs.stopCalibration();
-    
-		Calibrate cal_ts = new AbstractCalibrationFilter(this.ts) {};
-    cal_ts.startCalibration();
-		Thread.sleep(2000);
-		cal_ts.stopCalibration();
-    
+	  LCD.drawString("Welcome. CS1822-R6."
+		       "Members: Damien, Amirr"
+		       "	 Mahdi, Liam",
+		       0, 1);
+	  
+	  Thread.sleep(3000);
+	  
+	  Calibrate cal_cs = new AbstractCalibrationFilter(this.cs) {};
+	  cal_cs.startCalibration();
+	  Thread.sleep(2000);
+	  cal_cs.stopCalibration();
+	  
+	  Calibrate cal_ts = new AbstractCalibrationFilter(this.ts) {};
+	  cal_ts.startCalibration();
+	  Thread.sleep(2000);
+	  cal_ts.stopCalibration();
+
   }
   
 }
