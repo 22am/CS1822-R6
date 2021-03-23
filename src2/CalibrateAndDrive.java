@@ -41,12 +41,12 @@ public class CalibrateAndDrive {
 		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S2);
 		SampleProvider ts_sp = ts.getTouchMode();
 		
-		Calibrate cal_cs = new AbstractCalibrationFilter(cs_sp);
-		Calibrate cal_ts = new AbstractCalibrationFilter(ts_sp);
+		Calibrate cal_cs = new AbstractCalibrationFilter(cs_sp) {};
+		Calibrate cal_ts = new AbstractCalibrationFilter(ts_sp) {};
 		
 		cal_cs.startCalibration();
 		//sleep
-		((Thread) cal_cs).sleep(2000);
+		Thread.sleep(2000);
 		cal_cs.stopCalibration();
 		//min and max = cal_cs.max/min
 		//repeat for ts
