@@ -62,7 +62,7 @@ public class CalibrateAndDrive {
 		//pilot.setLinearSpeed(200);
 		
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, null);
+		BackUp backUp = new BackUp(pilot, ts);
 		EmergencyStop emergencyStop = new EmergencyStop();
 		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs);
 		/*
