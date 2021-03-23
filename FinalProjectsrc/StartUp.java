@@ -23,7 +23,8 @@ public class StartUp{
 	  cal_ts.startCalibration();
 	  Thread.sleep(2000);
 	  cal_ts.stopCalibration();
-
+	  
+	  SOUND.beepSequenceUp()
   }
   
 }
