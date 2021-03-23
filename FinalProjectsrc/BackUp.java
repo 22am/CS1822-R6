@@ -35,13 +35,16 @@ public class BackUp implements Behavior{
 	public void action() {
 		Random rand = new Random();
 		this.pilot.backward();
+		playTune()
 		Delay.msDelay(1500); // 1.5s
 		
 		if (rand.nextBoolean()) {
 			this.pilot.rotate(-510);
+			Sound.beep();
 		}
 		else {
 			this.pilot.rotate(510);
+			Sound.beep();
 		}
 	}
 
