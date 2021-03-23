@@ -67,13 +67,13 @@ public class CalibrateAndDrive {
 		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs);
 		/*
 		Check if Emergencey stop is hit first.
-		If not cintinue trundleing
-		If Ultrasonice notices object infront, slow down
+		If not cintinue trundleing.
+		If Ultrasonice notices object infront, slow down.
 		If touchsensor hits something, trigger backup( back up,
 								turn around,
 								play a sound,
-								then move in a random direction.)
-		If robot enters dark area, trigger light behaviour
+								then move in a random direction).
+		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
 		Arbitrator ab = new Arbitrator(new Behavior[] {emergencyStop, trundle,backUp, light});
 		
