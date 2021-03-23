@@ -48,9 +48,10 @@ public class CalibrateAndDrive {
 		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts);
+		BackUp backUp = new BackUp(pilot, ts, file);
 		EmergencyStop emergencyStop = new EmergencyStop();
-		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs);
+		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs, null);
+		SlowDown slowdown = new SlowDown(pilot, us);
 		/*
 		Check if Emergencey stop is hit first.
 		If not cintinue trundleing.
@@ -61,7 +62,7 @@ public class CalibrateAndDrive {
 								then move in a random direction).
 		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
-		Arbitrator ab = new Arbitrator(new Behavior[] {emergencyStop, trundle, backUp, light});		
+		Arbitrator ab = new Arbitrator(new Behavior[] {emergencyStop, trundle, slowdown, backUp, light});		
 		ab.go(); // This never returns! It is a blocking call.
 	}
 }
