@@ -14,7 +14,7 @@ public class emergencyStop implements Behaviour {
   @Override
   public void action(){
     pilot.stop();
-    SOUND.beepSequence();
+    Sound.beepSequence();
   }
   @Override
   public void suppress(){}
