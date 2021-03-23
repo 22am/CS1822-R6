@@ -1,7 +1,7 @@
 public class StartUp{
   Private SmapleProvider cs;
   Private SampleProvider ts;
-  public StartUp(EV3touch ts, EV3ColorSensor cs){
+  public StartUp(EV3TouchSensor ts, EV3ColorSensor cs){
     this.cs = cs.getRedMode();
     this.ts = ts.getTouchMode();
   }
