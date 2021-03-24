@@ -48,9 +48,9 @@ public class CalibrateAndDrive {
 		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts, file);
+		BackUp backUp = new BackUp(pilot, ts, file); // needs a sound file (currently set to null)
 		EmergencyStop emergencyStop = new EmergencyStop();
-		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs, null);
+		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs, null); // needs a sound file (currently set to null)
 		SlowDown slowdown = new SlowDown(pilot, us);
 		/*
 		Check if Emergencey stop is hit first.
