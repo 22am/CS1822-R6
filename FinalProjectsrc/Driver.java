@@ -18,7 +18,7 @@ import lejos.robotics.subsumption.Behavior;
 import java.io.File;
 import java.util.Random;
 
-public class CalibrateAndDrive {
+public class Driver {
 	final static int WHEEL_DIAMETER = 56; // The diameter (mm) of the wheels
 	final static int AXLE_LENGTH = 28; // The distance (mm) your two driven wheels
 	//Creates a chassis for bot
@@ -48,10 +48,12 @@ public class CalibrateAndDrive {
 		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts, file); // needs a sound file (currently set to null)
-		EmergencyStop emergencyStop = new EmergencyStop();
-		Light light = new Light(pilot, pilot.getLinearSpeed(200), cs, null); // needs a sound file (currently set to null)
+		BackUp backUp = new BackUp(pilot, ts, null); // needs a sound (.wav) file (currently set to null)
+		EmergencyStop emergencyStop = new EmergencyStop(pilot);
+		Light light = new Light(pilot, pilot.getLinearSpeed(), cs, null); // needs a sound (.wav) file (currently set to null) //FIXME
 		SlowDown slowdown = new SlowDown(pilot, us);
+		BatteryLevel bLevel = new BatteryLevel(null); // needs a sound (.wav) file (currently set to null)
+		BatteryLow bLow = new BatteryLow();
 		/*
 		Check if Emergencey stop is hit first.
 		If not cintinue trundleing.
@@ -62,7 +64,7 @@ public class CalibrateAndDrive {
 								then move in a random direction).
 		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
-		Arbitrator ab = new Arbitrator(new Behavior[] {emergencyStop, trundle, slowdown, backUp, light});		
+		Arbitrator ab = new Arbitrator(new Behavior[] {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light});		
 		ab.go(); // This never returns! It is a blocking call.
 	}
 }

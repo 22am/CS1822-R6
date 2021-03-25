@@ -5,22 +5,24 @@ import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
 import java.util.Random;
 
-public class SlowDown implements Behaviour{
-  private MovePilot mp;
-  private EV3UltraSonicSensor us;
-  private SampleProvider sp;
-  private float[] sample;
+public class SlowDown implements Behavior{
+	private MovePilot mp;
+    private EV3UltrasonicSensor us;
+    private SampleProvider sp;
+    private float[] sample;
+    private final static double safeDistance = 50f;
+    private final static int slowDownBy = 50;
   
-  public SlowDown(MovePilot mp, EV3UltraSonicSensor us,){
-    this.mp = mp;
-    this.sp = us.getDistanceMode();
-  }
-  public boolean takeControl(){
-    return this.sp.fetchSample(this.sample,0) > 50f;
-  }
-  public void action(){
-    this.mp.setLinearSpeed(this.mp.getLinearSpeed() - 50)
-  }
-  public void supress(){}
+    public SlowDown(MovePilot mp, EV3UltrasonicSensor us) {
+      this.mp = mp;
+      this.sp = us.getDistanceMode();
+    }
+    public boolean takeControl(){
+      return this.sp.fetchSample(this.sample,0) < safeDistance ; //FIXME
+    }
+    public void action(){
+      this.mp.setLinearSpeed(this.mp.getLinearSpeed() - slowDownBy);
+    }
 
+	public void suppress() {}
 }

@@ -1,8 +1,11 @@
-import lejos.hardware.sensor.EV3UltrasonicSensor;
+import lejos.hardware.Sound;
+import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
+
+import java.io.File;
 import java.util.Random;
 
 public class BackUp implements Behavior{
@@ -11,20 +14,14 @@ public class BackUp implements Behavior{
 	private SampleProvider sp;
 	private float[] sample = new float[1];
 	private File file;
+	private final static int DelayForTwoSec = 2000;
+	private final static int PilotBackwardDistance = 50;
 	BackUp(MovePilot pilot,EV3TouchSensor sensor,File file){
 		this.sensor = sensor;
-		this.sp = sensor.getTouchMode();
+		this.sp = this.sensor.getTouchMode();
 		this.pilot = pilot;
 	}
 	
-	public void playTune() {
-    		int time = Sound.playSample(this.file, 20);
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e){
-			e.printStackTrace();
-    		}
-  	}
 	
 	public boolean takeControl() {
 		sp.fetchSample(sample,0);
@@ -33,13 +30,17 @@ public class BackUp implements Behavior{
 
 
 	public void action() {
-		Random rand = new Random();
-		this.pilot.backward();
-		playTune()
-		Delay.msDelay(1500); // 1.5s
+		SampleSound tune = new SampleSound(file);
+		tune.playTune();
 		
+		Random rand = new Random();
+		this.pilot.backward(PilotBackwardDistance);
+		
+		Delay.msDelay(DelayForTwoSec); // 2s
+		
+		// Rotates in a random direction //FIXME
 		if (rand.nextBoolean()) {
-			this.pilot.rotate(-510);
+			this.pilot.rotate(-510 /*rand*/);
 			Sound.beep();
 		}
 		else {

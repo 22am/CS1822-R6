@@ -3,6 +3,7 @@ import lejos.robotics.subsumption.Behavior;
 
 public class Trundle implements Behavior {
 	private MovePilot pilot;
+	private final static int TenMeters = 10000;
 	Trundle(MovePilot p) {
 		this.pilot  = p;
 	}
@@ -10,7 +11,7 @@ public class Trundle implements Behavior {
 		return true;
 	}
 	public void action() {
-		pilot.travel(10000);
+		pilot.travel(TenMeters);
 	}
 	public void suppress() {}
 

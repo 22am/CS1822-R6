@@ -1,10 +1,11 @@
 import lejos.hardware.Button;
+import lejos.hardware.Sound;
 import lejos.robotics.navigation.MovePilot;
-import lejos.robotics.subsumption.Behaviour;
+import lejos.robotics.subsumption.Behavior;
 
-public class emergencyStop implements Behaviour {  
+public class EmergencyStop implements Behavior {  
   private MovePilot pilot;
-  emergencyStop(MovePilot p){
+  EmergencyStop(MovePilot p){
     this.pilot = p;
   }
   @Override

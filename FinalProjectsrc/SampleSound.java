@@ -3,13 +3,13 @@ import lejos.hardware.Sound;
 
 public class SampleSound {
 	private static File file;
-	public SampleSound(File f) {
-		SampleSound.file = f;
+	final static int soundVolume = 20;
+	public SampleSound(File file) {
+		SampleSound.file = file;
 	}
 
-	@SuppressWarnings("unused")
-	private static void playTune() {
-		int time = Sound.playSample(file, 20);
+	public static void playTune() {
+		int time = Sound.playSample(file, soundVolume);
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
