@@ -50,7 +50,7 @@ public class Driver {
 		Trundle trundle = new Trundle(pilot);
 		BackUp backUp = new BackUp(pilot, ts, null); // needs a sound (.wav) file (currently set to null)
 		EmergencyStop emergencyStop = new EmergencyStop(pilot);
-		Light light = new Light(pilot, pilot.getLinearSpeed(), cs, null); // needs a sound (.wav) file (currently set to null) //FIXME
+		Light light = new Light(pilot, pilot.getLinearSpeed(), cs, new File("Warning-sound.wav")); // needs a sound (.wav) file (currently set to null)
 		SlowDown slowdown = new SlowDown(pilot, us);
 		BatteryLevel bLevel = new BatteryLevel(null); // needs a sound (.wav) file (currently set to null)
 		BatteryLow bLow = new BatteryLow();
