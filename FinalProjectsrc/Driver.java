@@ -44,8 +44,8 @@ public class Driver {
 		then create to calibration classes to calibrate sensors,
 		Ultrasonic dosent need to be calibrated.
 		*/
-		StartUp calibrate = new StartUp(ts,cs);
-		calibrate.start();
+		StartUp startUp = new StartUp(ts,cs);
+		startUp.start();
 	
 		Trundle trundle = new Trundle(pilot);
 		BackUp backUp = new BackUp(pilot, ts, null); // needs a sound (.wav) file (currently set to null)
