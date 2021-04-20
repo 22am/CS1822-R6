@@ -9,22 +9,21 @@ import lejos.robotics.filter.AbstractCalibrationFilter;
 public class StartUp {
 	private SampleProvider cs;
 	private SampleProvider ts;
-	private final static int DelayTwoSec = 2000;
-	public StartUp(EV3Ultrasonicsensor us, EV3ColorSensor cs){
-		this.ts = us; //FIXME
+	public StartUp(EV3TouchSensor ts, EV3ColorSensor cs){
 		this.cs = cs.getRedMode();
+		this.ts = ts.getTouchMode();
 	}
 	public void start() throws InterruptedException{
 		LCD.drawString("Welcome. CS1822-R6.\nMembers: Damien, Amir\nMahdi, Liam", 0, 1);
-		Thread.sleep(DelayTwoSec);
+		Thread.sleep(3000);
 		Calibrate cal_cs = new AbstractCalibrationFilter(this.cs) {};
 		cal_cs.startCalibration();
-	    Thread.sleep(DelayTwoSec);
+	    Thread.sleep(2000);
 	    cal_cs.stopCalibration();
 	    
 	    Calibrate cal_ts = new AbstractCalibrationFilter(this.ts) {};
 	    cal_ts.startCalibration();
-	    Thread.sleep(DelayTwoSec);
+	    Thread.sleep(2000);
 	    cal_ts.stopCalibration();
 	  
 	    Sound.beepSequenceUp();

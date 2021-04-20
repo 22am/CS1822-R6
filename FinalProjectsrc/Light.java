@@ -12,7 +12,7 @@ public class Light implements Behavior {
 	private float maxSpeed = 720;
 	private MovePilot pilot;
 	private SampleProvider sp;
-	private float[] colour;
+	private float colour;
   	private File file;
   	//private double LINEAR_SPEED;
 	//float[] colour2 = new float[1];
@@ -21,19 +21,22 @@ public class Light implements Behavior {
 	
 	private final static float dark = 0.8f;
 	
-	Light(MovePilot p, float[] min, EV3ColorSensor cs, File file)	{
+	Light(MovePilot p, Double min, EV3ColorSensor cs, File file)	{
 		this.pilot = p;
     	this.sp = cs.getRedMode();
-    	this.colour = min;
+    	this.colour = min.floatValue();
     	this.file = file; 
     	//this.LINEAR_SPEED = Speed;
 	}
 	
-    //FIXME
+	//public void setLinearSpeed(float LINEAR_SPEED)	{
+	//	this.LINEAR_SPEED = LINEAR_SPEED;
+	//}
+  
   
   	public boolean takeControl() {
 		//is.sp2.fetchSample(colour2, 0);
-		return(this.colour[0] > dark /*this.sp.fetchSample(colour , 1)*/);
+		return(this.colour > dark /*this.sp.fetchSample(colour , 1)*/);
 	}
   
 

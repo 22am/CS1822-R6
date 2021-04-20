@@ -10,18 +10,17 @@ public class SlowDown implements Behavior{
     private EV3UltrasonicSensor us;
     private SampleProvider sp;
     private float[] sample;
-    private final static double safeDistance = 50f;
-    private final static int slowDownBy = 50;
   
     public SlowDown(MovePilot mp, EV3UltrasonicSensor us) {
       this.mp = mp;
       this.sp = us.getDistanceMode();
     }
     public boolean takeControl(){
-      return this.sp.fetchSample(this.sample,0) < safeDistance ; //FIXME
+    	sp.fetchSample(this.sample,0);
+    	return sample[0] < 50f ; 
     }
     public void action(){
-      this.mp.setLinearSpeed(this.mp.getLinearSpeed() - slowDownBy);
+      this.mp.setLinearSpeed(this.mp.getLinearSpeed() - 50);
     }
 
 	public void suppress() {}

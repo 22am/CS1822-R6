@@ -14,8 +14,6 @@ public class BackUp implements Behavior{
 	private SampleProvider sp;
 	private float[] sample = new float[1];
 	private File file;
-	private final static int DelayForTwoSec = 2000;
-	private final static int PilotBackwardDistance = 50;
 	BackUp(MovePilot pilot,EV3TouchSensor sensor,File file){
 		this.sensor = sensor;
 		this.sp = this.sensor.getTouchMode();
@@ -30,17 +28,16 @@ public class BackUp implements Behavior{
 
 
 	public void action() {
+		Random rand = new Random();
+		this.pilot.backward();
+		
 		SampleSound tune = new SampleSound(file);
 		tune.playTune();
 		
-		Random rand = new Random();
-		this.pilot.backward(PilotBackwardDistance);
+		Delay.msDelay(1500); // 1.5s
 		
-		Delay.msDelay(DelayForTwoSec); // 2s
-		
-		// Rotates in a random direction //FIXME
 		if (rand.nextBoolean()) {
-			this.pilot.rotate(-510 /*rand*/);
+			this.pilot.rotate(-510);
 			Sound.beep();
 		}
 		else {
