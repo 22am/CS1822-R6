@@ -14,10 +14,11 @@ public class BackUp implements Behavior{
 	private SampleProvider sp;
 	private float[] sample = new float[1];
 	private File file;
-	BackUp(MovePilot pilot,EV3TouchSensor sensor,File file){
+	BackUp(MovePilot pilot,EV3TouchSensor sensor/*,File file*/){
 		this.sensor = sensor;
 		this.sp = this.sensor.getTouchMode();
 		this.pilot = pilot;
+		this.file = file;
 	}
 	
 	
@@ -29,7 +30,7 @@ public class BackUp implements Behavior{
 
 	public void action() {
 		Random rand = new Random();
-		this.pilot.backward();
+		this.pilot.travel(500);
 		
 		/*SampleSound tune = new SampleSound(file);
 		tune.playTune();*/

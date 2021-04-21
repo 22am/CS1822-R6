@@ -5,6 +5,7 @@ import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.robotics.Calibrate;
 import lejos.robotics.SampleProvider;
 import lejos.robotics.filter.AbstractCalibrationFilter;
+import lejos.utility.Delay;
 
 public class StartUp {
 	private SampleProvider cs;
@@ -14,7 +15,10 @@ public class StartUp {
 		this.ts = ts.getTouchMode();
 	}
 	public void start() throws InterruptedException{
-		LCD.drawString("Welcome. CS1822-R6.\nMembers: Damien, Amir\nMahdi, Liam", 0, 1);
+		LCD.drawString("Welcome. CS1822-R6", 0, 1);
+		LCD.drawString("Members: Damien, Amir", 0, 2);
+		LCD.drawString("Mahdi, Liam", 0, 3);
+		
 		Thread.sleep(3000);
 		Calibrate cal_cs = new AbstractCalibrationFilter(this.cs) {};
 		cal_cs.startCalibration();
@@ -27,6 +31,9 @@ public class StartUp {
 	    cal_ts.stopCalibration();
 	  
 	    Sound.beepSequenceUp();
+		
+		
+		
 	}
   
 }

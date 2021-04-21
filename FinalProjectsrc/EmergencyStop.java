@@ -2,6 +2,7 @@ import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Behavior;
+import lejos.utility.Delay;
 
 public class EmergencyStop implements Behavior {  
   private MovePilot pilot;
@@ -14,8 +15,10 @@ public class EmergencyStop implements Behavior {
   }
   @Override
   public void action(){
-    pilot.stop();
+    
     Sound.beepSequence();
+    Delay.msDelay(500);
+    System.exit(1);
   }
   @Override
   public void suppress(){}

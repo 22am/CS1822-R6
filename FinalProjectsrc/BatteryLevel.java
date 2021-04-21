@@ -10,7 +10,7 @@ public class BatteryLevel implements Behavior {
 	final static int CURRENT_BATTERY_LEVEL = Battery.getVoltageMilliVolt();
 	final static int SAFE_BATTERY_LEVEL = 1000; // In milliVolt
 	private File file;
-	BatteryLevel(File file) {
+	BatteryLevel(/*File file*/) {
 		this.file = file;
 	}
 	@Override

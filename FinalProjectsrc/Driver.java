@@ -40,31 +40,35 @@ public class Driver {
 		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S3);
 		
 		/*
-		Create instace of calibrate class,
+		Create instance of calibrate class,
 		then create to calibration classes to calibrate sensors,
-		Ultrasonic dosent need to be calibrated.
+		Ultrasonic doesn't need to be calibrated.
 		*/
-		StartUp startUp = new StartUp(ts,cs);
-		startUp.start();
+		StartUp calibrate = new StartUp(ts,cs);
+		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts, new File("Warning-sound.wav"));
+		BackUp backUp = new BackUp(pilot, ts/*, new File("Warning-sound.wav")*/);
 		EmergencyStop emergencyStop = new EmergencyStop(pilot);
-		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs, new File("Warning-sound.wav"));
+		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs/*, new File("Warning-sound.wav")*/);
 		SlowDown slowdown = new SlowDown(pilot, us);
-		BatteryLevel bLevel = new BatteryLevel(new File("Warning-sound.wav")); 
+		BatteryLevel bLevel = new BatteryLevel(/*new File("Warning-sound.wav")*/); 
 		BatteryLow bLow = new BatteryLow();
 		/*
-		Check if Emergencey stop is hit first.
-		If not cintinue trundleing.
-		If Ultrasonice notices object infront, slow down.
+		Check if Emergency stop is hit first.
+		If not continue trundling.
+		If Ultrasonic notices object infront, slow down.
 		If touchsensor hits something, trigger backup( back up,
 								turn around,
 								play a sound,
 								then move in a random direction).
 		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
-		Arbitrator ab = new Arbitrator(new Behavior[] {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light});		
+		
+		Behavior [] bArray = {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light};
+		Arbitrator ab = new Arbitrator(bArray);
+		
+		//Arbitrator ab = new Arbitrator(new Behavior[] {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light});		
 		ab.go(); // This never returns! It is a blocking call.
 	}
 }
