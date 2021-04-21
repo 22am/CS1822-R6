@@ -32,7 +32,7 @@ public class Driver {
 		return new MovePilot(chassis);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		MovePilot pilot = getPilot(MotorPort.A, MotorPort.B, WHEEL_DIAMETER, AXLE_LENGTH);
 		
 		EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S1);
@@ -48,11 +48,11 @@ public class Driver {
 		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts, null); // needs a sound (.wav) file (currently set to null)
+		BackUp backUp = new BackUp(pilot, ts, new File("Warning-sound.wav"));
 		EmergencyStop emergencyStop = new EmergencyStop(pilot);
-		Light light = new Light(pilot, pilot.getLinearSpeed(), cs, new File("Warning-sound.wav")); // needs a sound (.wav) file (currently set to null)
+		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs, new File("Warning-sound.wav"));
 		SlowDown slowdown = new SlowDown(pilot, us);
-		BatteryLevel bLevel = new BatteryLevel(null); // needs a sound (.wav) file (currently set to null)
+		BatteryLevel bLevel = new BatteryLevel(new File("Warning-sound.wav")); 
 		BatteryLow bLow = new BatteryLow();
 		/*
 		Check if Emergencey stop is hit first.

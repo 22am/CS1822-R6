@@ -31,8 +31,9 @@ public class BackUp implements Behavior{
 		Random rand = new Random();
 		this.pilot.backward();
 		
-		SampleSound tune = new SampleSound(file);
-		tune.playTune();
+		/*SampleSound tune = new SampleSound(file);
+		tune.playTune();*/
+		Sound.beep();
 		
 		Delay.msDelay(1500); // 1.5s
 		
