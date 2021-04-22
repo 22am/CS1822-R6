@@ -1,25 +1,24 @@
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
-import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
 
 public class EmergencyStop implements Behavior {  
-  private MovePilot pilot;
-  EmergencyStop(MovePilot p){
-    this.pilot = p;
-  }
+//  private MovePilot pilot;
+//  private boolean suppressed = false;
+  EmergencyStop(){}
   @Override
   public boolean takeControl(){
     return(Button.ENTER.isDown());
   }
   @Override
   public void action(){
-    
+//    suppressed= false;
     Sound.beepSequence();
-    Delay.msDelay(500);
+    Sound.beepSequence();
+//    Delay.msDelay(1000);
     System.exit(1);
   }
   @Override
-  public void suppress(){}
+  public void suppress(){/*suppressed = true;*/}
 }

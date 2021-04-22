@@ -1,4 +1,4 @@
-import lejos.hardware.Sound;
+
 import lejos.hardware.motor.BaseRegulatedMotor;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -6,17 +6,13 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
-import lejos.robotics.Calibrate;
-import lejos.robotics.SampleProvider;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
-import lejos.robotics.filter.AbstractCalibrationFilter;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
-import java.io.File;
-import java.util.Random;
+
 
 public class Driver {
 	final static int WHEEL_DIAMETER = 56; // The diameter (mm) of the wheels
@@ -35,25 +31,25 @@ public class Driver {
 	public static void main(String[] args) throws InterruptedException {
 		MovePilot pilot = getPilot(MotorPort.A, MotorPort.B, WHEEL_DIAMETER, AXLE_LENGTH);
 		
-		EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S1);
+//		EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 		EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S2);
-		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S3);
+//		EV3TouchSensor ts = new EV3TouchSensor(SensorPort.S3);
 		
 		/*
 		Create instance of calibrate class,
 		then create to calibration classes to calibrate sensors,
 		Ultrasonic doesn't need to be calibrated.
 		*/
-		StartUp calibrate = new StartUp(ts,cs);
+		StartUp calibrate = new StartUp(/*ts,*/cs);
 		calibrate.start();
 	
 		Trundle trundle = new Trundle(pilot);
-		BackUp backUp = new BackUp(pilot, ts/*, new File("Warning-sound.wav")*/);
-		EmergencyStop emergencyStop = new EmergencyStop(pilot);
-		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs/*, new File("Warning-sound.wav")*/);
-		SlowDown slowdown = new SlowDown(pilot, us);
-		BatteryLevel bLevel = new BatteryLevel(/*new File("Warning-sound.wav")*/); 
-		BatteryLow bLow = new BatteryLow();
+		BackUp backUp = new BackUp(pilot/*, ts, new File("Warning-sound.wav")*/);
+		EmergencyStop emergencyStop = new EmergencyStop();
+//		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs/*, new File("Warning-sound.wav")*/);
+//		SlowDown slowdown = new SlowDown(pilot, us);
+//		BatteryLevel bLevel = new BatteryLevel(/*new File("Warning-sound.wav")*/); 
+//		BatteryLow bLow = new BatteryLow();
 		/*
 		Check if Emergency stop is hit first.
 		If not continue trundling.
@@ -65,7 +61,10 @@ public class Driver {
 		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
 		
-		Behavior [] bArray = {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light};
+//		Behavior [] bArray = {bLow, emergencyStop, bLevel, light, backUp, slowdown, trundle};
+//		Behavior [] bArray = {trundle, slowdown, backUp, light, bLevel, emergencyStop, bLow};
+//		Behavior [] bArray = {/*bLow, */emergencyStop,/* bLevel, light, backUp, slowdown, */trundle};
+		Behavior [] bArray = { trundle, backUp, emergencyStop /* slowdown, light, , bLevel, bLow, */};
 		Arbitrator ab = new Arbitrator(bArray);
 		
 		//Arbitrator ab = new Arbitrator(new Behavior[] {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light});		

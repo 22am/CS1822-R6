@@ -3,15 +3,17 @@ import lejos.robotics.subsumption.Behavior;
 
 public class Trundle implements Behavior {
 	private MovePilot pilot;
+//	private boolean suppressed = false;
 	Trundle(MovePilot p) {
 		this.pilot  = p;
 	}
 	public boolean takeControl() {
-		return true;
+		return !this.pilot.isMoving();
 	}
 	public void action() {
-		pilot.travel(-10000);
+//		suppressed=false;
+		pilot.forward();
 	}
-	public void suppress() {}
+	public void suppress() {/*suppressed = true;*/}
 
 }

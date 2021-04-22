@@ -9,15 +9,16 @@ import lejos.utility.Delay;
 
 public class StartUp {
 	private SampleProvider cs;
-	private SampleProvider ts;
-	public StartUp(EV3TouchSensor ts, EV3ColorSensor cs){
+//	private SampleProvider ts;
+	public StartUp(/*EV3TouchSensor ts,*/ EV3ColorSensor cs){
 		this.cs = cs.getRedMode();
-		this.ts = ts.getTouchMode();
+//		this.ts = ts.getTouchMode();
 	}
 	public void start() throws InterruptedException{
 		LCD.drawString("Welcome. CS1822-R6", 0, 1);
-		LCD.drawString("Members: Damien, Amir", 0, 2);
-		LCD.drawString("Mahdi, Liam", 0, 3);
+		LCD.drawString("Members:", 0, 2);
+		LCD.drawString("Damien, Amir", 0, 3);
+		LCD.drawString("Mahdi, Liam", 0, 4);
 		
 		Thread.sleep(3000);
 		Calibrate cal_cs = new AbstractCalibrationFilter(this.cs) {};
@@ -25,11 +26,11 @@ public class StartUp {
 	    Thread.sleep(2000);
 	    cal_cs.stopCalibration();
 	    
-	    Calibrate cal_ts = new AbstractCalibrationFilter(this.ts) {};
+/*	    Calibrate cal_ts = new AbstractCalibrationFilter(this.ts) {};
 	    cal_ts.startCalibration();
 	    Thread.sleep(2000);
 	    cal_ts.stopCalibration();
-	  
+*/	  
 	    Sound.beepSequenceUp();
 		
 		
