@@ -30,6 +30,7 @@ public class Driver {
 
 	public static void main(String[] args) throws InterruptedException {
 		MovePilot pilot = getPilot(MotorPort.A, MotorPort.B, WHEEL_DIAMETER, AXLE_LENGTH);
+		pilot.setLinearSpeed(180);
 		
 //		EV3UltrasonicSensor us = new EV3UltrasonicSensor(SensorPort.S4);
 		EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S2);
@@ -46,7 +47,7 @@ public class Driver {
 		Trundle trundle = new Trundle(pilot);
 		BackUp backUp = new BackUp(pilot/*, ts, new File("Warning-sound.wav")*/);
 		EmergencyStop emergencyStop = new EmergencyStop();
-//		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs/*, new File("Warning-sound.wav")*/);
+		Light light = new Light(pilot,/* pilot.getLinearSpeed(),*/ cs/*, new File("Warning-sound.wav")*/);
 //		SlowDown slowdown = new SlowDown(pilot, us);
 //		BatteryLevel bLevel = new BatteryLevel(/*new File("Warning-sound.wav")*/); 
 //		BatteryLow bLow = new BatteryLow();
@@ -61,10 +62,7 @@ public class Driver {
 		If robot enters dark area, trigger light behaviour, stopping robot and plays a distress tone.
 		*/
 		
-//		Behavior [] bArray = {bLow, emergencyStop, bLevel, light, backUp, slowdown, trundle};
-//		Behavior [] bArray = {trundle, slowdown, backUp, light, bLevel, emergencyStop, bLow};
-//		Behavior [] bArray = {/*bLow, */emergencyStop,/* bLevel, light, backUp, slowdown, */trundle};
-		Behavior [] bArray = { trundle, backUp, emergencyStop /* slowdown, light, , bLevel, bLow, */};
+		Behavior [] bArray = { trundle, backUp, light, emergencyStop /* slowdown, bLevel, bLow, */};
 		Arbitrator ab = new Arbitrator(bArray);
 		
 		//Arbitrator ab = new Arbitrator(new Behavior[] {bLow, emergencyStop, bLevel, trundle, slowdown, backUp, light});		

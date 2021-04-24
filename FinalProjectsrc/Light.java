@@ -2,6 +2,7 @@ import java.io.File;
 
 import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
+import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
@@ -11,7 +12,8 @@ import lejos.robotics.navigation.MovePilot;
 
 public class Light implements Behavior {
 //	private float maxSpeed = 720;
-	private MovePilot pilot;
+//	private EV3ColorSensor cs = new EV3ColorSensor(SensorPort.S2);
+//	private MovePilot pilot;
 	private SampleProvider sp;
 //	private float colour;
 //  	private File file;
@@ -21,10 +23,10 @@ public class Light implements Behavior {
 //	private SampleProvider sp2 = cs2.getRedMode();
 	private float[] level = new float[1];
 	
-	private final static float dark = 0.5f;
+	private final static float dark = 0.10f;
 	
-	Light(MovePilot p,/* Double min,*/ EV3ColorSensor cs/*, File file*/) throws NullPointerException	{
-		this.pilot = p;
+	Light(MovePilot p,/* Double min,*/ EV3ColorSensor cs /*, File file*/) throws NullPointerException	{
+//		this.pilot = p;
     	this.sp = cs.getRedMode();
 //    	this.colour = min.floatValue();
 //    	this.file = file; 
@@ -38,7 +40,8 @@ public class Light implements Behavior {
   
   	public boolean takeControl() {
 		sp.fetchSample(level, 0);
-		return(level[0] > dark /*this.sp.fetchSample(colour , 1)*/);
+		//System.out.println(Float.toString(level[0]));
+		return(level[0] < dark /*this.sp.fetchSample(colour , 1)*/);
 	}
   
 
@@ -50,11 +53,12 @@ public class Light implements Behavior {
 		
 		//Buzz instead of playing a sample sound
 		Sound.buzz();
+		Sound.buzz();
 		
 		LCD.clear();
 		System.out.println("You have reached a dark area!");
 		
-		Delay.msDelay(1000);
+		Delay.msDelay(500);
 		
 		System.exit(1);
 	}

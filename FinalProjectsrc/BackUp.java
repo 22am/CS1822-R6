@@ -41,7 +41,11 @@ public class BackUp implements Behavior{
 
 
 	public void action() {
-		Random rand = new Random();
+	    Random rand = new Random(); //instance of random class
+	    int upperbound = 16;
+	      //generate random values from 0-24
+	    int int_random = rand.nextInt(upperbound);
+	    int rotateValue = (int_random+15)*10;
 		
 		
 		/*SampleSound tune = new SampleSound(file);
@@ -50,14 +54,14 @@ public class BackUp implements Behavior{
 		
 //		Delay.msDelay(1500); // 1.5s
 		
-		pilot.travel(-500);
+		pilot.travel(-250);
 		
 		if (rand.nextBoolean()) {
-			pilot.rotate(-510);
+			pilot.rotate(-rotateValue);
 			Sound.beep();
 		}
 		else {
-			pilot.rotate(510);
+			pilot.rotate(rotateValue);
 			Sound.beep();
 		}
 	}

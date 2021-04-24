@@ -17,7 +17,7 @@ public class SlowDown implements Behavior{
     }
     public boolean takeControl(){
     	sp.fetchSample(this.sample,0);
-    	return sample[0] < 0.15 && this.mp.isMoving() ; 
+    	return sample[0] < 0.15f && this.mp.isMoving() ; 
     }
     public void action(){
     	this.mp.setLinearSpeed(this.mp.getLinearSpeed() *1/2);
